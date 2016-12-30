@@ -1,0 +1,27 @@
+language: python
+dist: trusty
+python:
+  - "3.6"
+
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y unzip wget
+
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+  - pip install flake8 nose2 cov-core coveralls green
+  - wget https://github.com/rogerbinns/apsw/releases/download/3.15.2-r1/apsw-3.15.2-r1.zip
+  - unzip apsw-3.15.2-r1.zip
+  - cd apsw-3.15.2-r1 && python setup.py fetch --version=3.15.0 --all build --enable-all-extensions install && cd ..
+
+
+script:
+  - flake8 --exit-zero --statistics srlib
+#  - coverage run -m unittest discover -s srlib
+  - nose2 -C
+  - coverage report -m
+
+after_success:
+  coveralls
