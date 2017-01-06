@@ -1,0 +1,7 @@
+[
+	"test@example.com",
+	"test+test@example.com",
+	"test-test@example.com",
+	"john@a.b.c.d.example.com",
+	"+@example.com"
+]

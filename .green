@@ -1,0 +1,5 @@
+verbose       = 3
+logging       = True
+quiet-coverage = True
+processes = 1
+
