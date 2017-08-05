@@ -10,7 +10,8 @@ import json
 
 from srpoint import settings
 
-from srpoint.model.sqlite.users_model import UserModel
+#from srpoint.model.sqlite.users_model import UserModel
+from srpoint.model import UsersModel
 
 
 class User:
@@ -22,9 +23,10 @@ class User:
 			user_id = None
 
 		if user_id:
-			user = UserModel(user_id)
+			user = UsersModel().get_user(user_id)
+			#user = UserModel(user_id)
 
-			req.context['result'] = user.get()
+			req.context['result'] = user
 		else:
 			raise falcon.HTTPError(falcon.HTTP_FORBIDDEN,
 					title="Forbidden",

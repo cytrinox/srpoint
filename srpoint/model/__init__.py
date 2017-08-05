@@ -8,9 +8,8 @@
 import srpoint.settings
 
 
-
-if srpoint.settings.DB_ENGINE == 'rethinkdb':
+if srpoint.settings.DB_ENGINE == 'rethinkdb':  # pragma: no cover
 	print("loading rehtinkdb")
 	from .redb.users_model import *
 else:
-	print("loading sqlite")
+	print("loading sqlite")  # pragma: no cover

@@ -1,0 +1,10 @@
+falcon
+pyjwt
+rethinkdb
+green
+email_validator
+ddt
+telepot
+jinja2
+lxml
+

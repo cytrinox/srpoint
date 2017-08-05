@@ -2,25 +2,40 @@ language: python
 dist: trusty
 python:
   - "3.6"
+    #  - "3.5"
+    #  - "3.4"
 
+addons:
+  rethinkdb: "2.3"
+
+env:
+  - SRPOINT_DB_ENGINE=rethinkdb
+  - SRPOINT_DB_ENGINE=sqlite
 
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y unzip wget
+  - wget "http://mirrors.kernel.org/ubuntu/pool/main/s/sqlite3/sqlite3_3.11.0-1ubuntu1_amd64.deb"
+  - wget "http://mirrors.kernel.org/ubuntu/pool/main/s/sqlite3/libsqlite3-0_3.11.0-1ubuntu1_amd64.deb"
+  - sudo dpkg -i libsqlite3-0_3.11.0-1ubuntu1_amd64.deb
+  - sudo dpkg -i sqlite3_3.11.0-1ubuntu1_amd64.deb
+
 
 # command to install dependencies
 install:
   - pip install -r requirements.txt
   - pip install flake8 nose2 cov-core coveralls green
-  - wget https://github.com/rogerbinns/apsw/releases/download/3.15.2-r1/apsw-3.15.2-r1.zip
-  - unzip apsw-3.15.2-r1.zip
-  - cd apsw-3.15.2-r1 && python setup.py fetch --version=3.15.0 --all build --enable-all-extensions install && cd ..
+  - wget https://github.com/rogerbinns/apsw/releases/download/3.19.3-r1/apsw-3.19.3-r1.zip
+  - unzip apsw-3.19.3-r1.zip
+  - cd apsw-3.19.3-r1 && python setup.py fetch --missing-checksum-ok --all build --enable-all-extensions install && cd ..
 
 
 script:
-  - flake8 --exit-zero --statistics srlib
+  - flake8 --exit-zero --statistics srpoint
+  - python3 rethinkdb_setup.py
+  - sqlite3 point.db < sqlite_setup.ddl
 #  - coverage run -m unittest discover -s srlib
-  - nose2 -C
+  - green3 -qRvvv tests
   - coverage report -m
 
 after_success:
