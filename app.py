@@ -8,7 +8,7 @@
 import sys
 import signal
 
-from srpoint import create_api
+from srpoint.rest.rest_api import create_rest_api
 
 from srpoint.utils.logging import logger
 from srpoint.utils.checks import check_python
@@ -26,7 +26,7 @@ signal.signal(signal.SIGINT, signal_handler_int)
 
 
 # Main FALCON app
-api = create_api()
+api = create_rest_api()
 
 
 # Sharing

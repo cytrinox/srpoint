@@ -11,9 +11,9 @@ from srpoint import settings
 
 class BaseHeaders(object):
 
-	def process_response(self, req, res, resource):
+	def process_request(self, req, res):
 		res.set_headers([
-			('Cache-Control', 'no-store, must-revalidate, no-cache, max-age=0'),
+			#('Cache-Control', 'no-store, must-revalidate, no-cache, max-age=0'),
 			('Content-Type', 'application/json; charset=utf-8'),
 			('Server', settings.SERVER_NAME),
 		])

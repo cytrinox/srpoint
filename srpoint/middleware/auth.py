@@ -18,10 +18,11 @@ class RequireAuth(object):
 	"""Force authentication.
 	"""
 	whitelist = (
-		'/test_api',
-		'/v1/server_status',
-		'/v1/signon',
-		'/v1/auth',)
+		'/ping',
+		'/v1/serverstatus',
+		'/v1/users',
+		'/v1/users/me/login',
+	)
 
 	def process_request(self, req, resp):
 		if req.path not in self.whitelist:

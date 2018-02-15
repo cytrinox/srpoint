@@ -8,6 +8,7 @@
 import smtplib
 import time
 
+from srpoint.utils.debugging import timetrace
 from email.header import make_header
 
 
@@ -19,6 +20,7 @@ class Mailer(object):
 		self.smtp_password = password
 		self.smtp_use_tls = use_tls
 
+	@timetrace
 	def send(self, message, subject, email_to, email_from=None, email_cc=None, email_bcc=None):
 		msg = message.to_email()
 		msg['Subject'] = str(make_header([(subject, message.charset)]))

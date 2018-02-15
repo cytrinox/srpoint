@@ -1,5 +1,6 @@
 falcon
 pyjwt
+bcrypt
 rethinkdb
 green
 email_validator

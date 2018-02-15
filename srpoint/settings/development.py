@@ -43,6 +43,11 @@ SESSION_EXPIRES = 168
 # is an example. **You MUST replace it!**
 SECRET = '***DUMMY_TOKEN***'
 
+# Profiling settings
+# Report functions running for more than 1.5 seconds with INFO level
+PROFILING_SUSPECT_DURATION = 1.5
+PROFILING = False
+
 # Logging settings. This is a standard python logging configuration. The levels
 # are supposed to change depending on the settings file, to avoid clogging the
 # logs with useless information.

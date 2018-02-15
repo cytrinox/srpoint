@@ -23,7 +23,7 @@ def create_jwt_token(user):
 		'iat': now,
 		'exp': exp
 	}
-	token = jwt.encode(payload, settings.SECRET)
+	token = jwt.encode(payload, settings.SECRET, algorithm='HS256')
 	return token.decode('unicode_escape')
 
 
@@ -42,4 +42,4 @@ def parse_jwt_token(auth):
 		raise falcon.HTTPError(falcon.HTTP_401,
 							   title="Invalid Header",
 							   description="Authorization header must be Bearer + \s + token")
-	return jwt.decode(parts[1], settings.SECRET)
+	return jwt.decode(parts[1], settings.SECRET, algorithms=['HS256'])

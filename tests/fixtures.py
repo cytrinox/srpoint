@@ -6,14 +6,14 @@
 """
 
 from falcon import testing
-from srpoint import create_api
+from srpoint.rest.rest_api import create_rest_api
 
 
 class AppFixture(testing.TestCase):
 
 	def setUp(self):
 		super(AppFixture, self).setUp()
-		self.app = create_api()
+		self.app = create_rest_api()
 
 
 def auth_token(token):
